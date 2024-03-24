@@ -1,0 +1,6 @@
+use_frameworks!
+target 'RotatingCamera_Tests' do
+  pod 'RotatingCamera', :path => '../'
+  
+  
+end
