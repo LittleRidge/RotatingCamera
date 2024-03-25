@@ -12,15 +12,12 @@ let package = Package(
             name: "RotatingCamera",
             targets: ["RotatingCamera"]),
     ],
-    dependencies: [
-        .package(url: "https://github.com/SnapKit/SnapKit.git", .upToNextMajor(from: "5.0.1")),
-        .package(url: "https://github.com/jdg/MBProgressHUD.git", .upToNextMajor(from: "1.2.0"))
-    ],
+    dependencies: [],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "RotatingCamera", dependencies: ["SnapKit", "MBProgressHUD"]),
+            name: "RotatingCamera", dependencies: []),
         .testTarget(
             name: "RotatingCameraTests",
             dependencies: ["RotatingCamera"]),

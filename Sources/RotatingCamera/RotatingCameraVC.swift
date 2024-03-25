@@ -9,7 +9,6 @@ import AVFoundation
 import AVKit
 import ImageIO
 import Photos
-import SnapKit
 
 public final class RotatingCameraVC: UIViewController, UIGestureRecognizerDelegate {
     
@@ -23,6 +22,8 @@ public final class RotatingCameraVC: UIViewController, UIGestureRecognizerDelega
     let switchCameraButton = UIButton()
     let backButton = UIButton()
     let captureButton = CaptureButton()
+    let indicatorLoading = UIActivityIndicatorView()
+
     var angle : CGFloat!
     var initialZoom: CGFloat!
     
@@ -30,6 +31,7 @@ public final class RotatingCameraVC: UIViewController, UIGestureRecognizerDelega
     var currentOrientation: UIDeviceOrientation = .portrait
     
     private var isRecording = false
+    
     
     //MARK:- Life Cycle
     public override func viewDidLoad() {
@@ -155,7 +157,7 @@ extension RotatingCameraVC {
     }
     
     func continueWriting(url: URL) {
-        hideSpinner()
+        indicatorLoading.stopAnimating()
         
         completionHandler?(url)
     }
@@ -181,7 +183,7 @@ extension RotatingCameraVC {
         case .ended, .cancelled, .failed, .possible:
             if isRecording {
                 captureButton.pressedEndReleasedToStopCapture()
-                showSpinner()
+                indicatorLoading.startAnimating()
             } else {
                 captureButton.pressedEndReleasedToStartCapture()
             }
@@ -210,17 +212,5 @@ extension RotatingCameraVC {
             changePreviousOrientation()
             customCameraOutput?.changeVideoOrientation(orientation: UIDevice.current.orientation)
         }
-    }
-}
-
-extension RotatingCameraVC: LoadingViewCompitable {
-    var spinnerConfig: SpinnerConfiguration { .dark }
-    
-    func showSpinner() {
-        view.showSpinner(spinnerConfig: spinnerConfig)
-    }
-    
-    func hideSpinner() {
-        view.hideSpinner()
     }
 }

@@ -32,17 +32,22 @@ final class CaptureButton: UIView {
         self.addSubview(circle)
         self.addSubview(square)
         
-        circle.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.width.height.equalTo(innerCircleSize)
-        }
+        circle.translatesAutoresizingMaskIntoConstraints = false
+        square.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            circle.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            circle.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            circle.widthAnchor.constraint(equalToConstant: innerCircleSize),
+            circle.heightAnchor.constraint(equalToConstant: innerCircleSize),
+            square.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            square.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            square.widthAnchor.constraint(equalToConstant: innerRectSize),
+            square.heightAnchor.constraint(equalToConstant: innerRectSize)
+        ])
+        
         circle.backgroundColor = .red
         circle.layer.cornerRadius = innerCircleSize/2
-        
-        square.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.width.height.equalTo(innerRectSize)
-        }
         square.backgroundColor = .red
         square.layer.cornerRadius = 4
     }

@@ -13,12 +13,17 @@ Pod::Spec.new do |s|
   s.homepage         = 'https://github.com/LittleRidge/RotatingCamera.git'
   s.author           = { 'Евгений Сергеев' => 'bf2account@mail.ru' }
   s.source           = { :git => 'https://github.com/LittleRidge/RotatingCamera.git', :tag => s.version.to_s }
+  s.license          = 'MIT'
+  s.summary          = 'Camera that can rotate when filming.'
 
-  s.ios.deployment_target = '13.0'
+  s.ios.deployment_target   = '13.0'
+  s.platform                = :ios, '13.0'
 
-  s.source_files = 'Sources/RotatingCamera/**/*'
+  s.source_files            = 'Sources/RotatingCamera/**/*'
   
-  s.frameworks = 'UIKit', 'AVFoundation'
+  s.frameworks              = 'UIKit', 'AVFoundation'
   s.dependency 'SnapKit', '~> 5.0.1'
   s.dependency 'MBProgressHUD', '~> 1.2.0'
+  
+  s.swift_versions = ['5.0']
 end

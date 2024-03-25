@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 extension RotatingCameraVC {    
     func setupUI(){
@@ -14,29 +13,38 @@ extension RotatingCameraVC {
         
         setupSwitchCameraButton()
         setupBackCameraButton()
+        setupIndicatorLoading()
         
         view.addSubview(switchCameraButton)
         view.addSubview(captureButton)
         view.addSubview(backButton)
+        view.addSubview(indicatorLoading)
         
-        switchCameraButton.snp.makeConstraints { make in
-            make.width.height.equalTo(45)
-            make.right.equalToSuperview().inset(25)
-            make.bottom.equalToSuperview().inset(95)
-        }
+        switchCameraButton.translatesAutoresizingMaskIntoConstraints = false
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        captureButton.translatesAutoresizingMaskIntoConstraints = false
+        indicatorLoading.translatesAutoresizingMaskIntoConstraints = false
         
-        captureButton.snp.makeConstraints { make in
-            make.width.height.equalTo(72)
-            make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().inset(81)
-        }
+        NSLayoutConstraint.activate([
+            switchCameraButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25.0),
+            switchCameraButton.heightAnchor.constraint(equalToConstant: 45.0),
+            switchCameraButton.widthAnchor.constraint(equalToConstant: 45.0),
+            switchCameraButton.centerYAnchor.constraint(equalTo: captureButton.centerYAnchor),
+            backButton.heightAnchor.constraint(equalToConstant: 30.0),
+            backButton.widthAnchor.constraint(equalToConstant: 30.0),
+            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25.0),
+            backButton.centerYAnchor.constraint(equalTo: captureButton.centerYAnchor),
+            captureButton.heightAnchor.constraint(equalToConstant: 72.0),
+            captureButton.widthAnchor.constraint(equalToConstant: 72.0),
+            captureButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -81.0),
+            captureButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            indicatorLoading.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            indicatorLoading.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            indicatorLoading.widthAnchor.constraint(equalTo: view.widthAnchor),
+            indicatorLoading.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
+        
         captureButton.backgroundColor = .clear
-        
-        backButton.snp.makeConstraints { make in
-            make.width.height.equalTo(45)
-            make.left.equalToSuperview().inset(25)
-            make.bottom.equalToSuperview().inset(95)
-        }
     }
         
     func switchUIOrientation() {
@@ -82,7 +90,7 @@ extension RotatingCameraVC {
     
     func setupSwitchCameraButton() {
         switchCameraButton.backgroundColor = .clear
-        switchCameraButton.setImage(UIImage(systemName: "arrow.clockwise"), for: .normal)
+        switchCameraButton.setImage(UIImage(systemName: "arrow.triangle.2.circlepath.camera"), for: .normal)
         switchCameraButton.tintColor = .white
         switchCameraButton.imageView?.contentMode = .scaleAspectFit
         switchCameraButton.contentHorizontalAlignment = .fill
@@ -92,11 +100,17 @@ extension RotatingCameraVC {
     
     func setupBackCameraButton() {
         backButton.backgroundColor = .clear
-        backButton.setImage(UIImage(systemName: "arrow.uturn.left"), for: .normal)
+        backButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         backButton.tintColor = .white
         backButton.imageView?.contentMode = .scaleAspectFit
         backButton.contentHorizontalAlignment = .fill
         backButton.contentVerticalAlignment = .fill
         backButton.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    func setupIndicatorLoading() {
+        indicatorLoading.transform = CGAffineTransform(scaleX: 2.4, y: 2.4)
+        indicatorLoading.color = .white
+        indicatorLoading.hidesWhenStopped = true
     }
 }

@@ -29,10 +29,3 @@ protocol RotatingCameraPresenterProtocol: AnyObject {
     func adjustZoom(scale: CGFloat)
     func initialZoomTransfer() -> CGFloat
 }
-
-protocol LoadingViewCompitable {
-    var spinnerConfig: SpinnerConfiguration { get }
-    
-    func showSpinner()
-    func hideSpinner()
-}
